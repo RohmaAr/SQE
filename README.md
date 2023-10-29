@@ -1,6 +1,5 @@
 ## Old Version
 - https://github.com/jaygajera17/E-commerce-project-springBoot/tree/main
-- issue: everytime connection open close for access database 
 
 ## New Upgrade ( what's new)
 - Hibernate configuration added( database and tables automatically create when run the project)
@@ -106,3 +105,6 @@ The following guides illustrate how to use some features concretely:
 
 [youtube-shield]:https://img.shields.io/youtube/views/c6WWdINWSlI?style=social
 [youtube-url]:  https://youtu.be/c6WWdINWSlI
+
+## Issue and Solution 
+- A line of code in the AdminController file was generating an error while a PreparedStatement was being executed by execute() method. Simply changing that to executeQuery() resolved the issue.
