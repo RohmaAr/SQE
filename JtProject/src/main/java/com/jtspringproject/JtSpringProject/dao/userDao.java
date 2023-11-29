@@ -29,7 +29,37 @@ public class userDao {
 		List<User>  userList = session.createQuery("from CUSTOMER").list();
         return userList;
     }
-    
+
+	@Transactional
+	public boolean isEmailUnique(User user) {
+		Query query = sessionFactory.getCurrentSession().createQuery("from CUSTOMER where email = :email");
+		query.setParameter("email", user.getEmail());
+
+		try {
+			query.getSingleResult();
+				System.out.println("Already exists");
+				return false;
+		} catch (Exception e) {
+			System.out.println("Error checking email uniqueness: " + e.getMessage());
+			System.out.println("Unique Email");
+			return true;  // Return false in case of an exception.
+		}
+	}
+	@Transactional
+	public boolean isUsernameUnique(User user) {
+		Query query = sessionFactory.getCurrentSession().createQuery("from CUSTOMER where username = :username");
+		query.setParameter("username", user.getUsername());
+
+		try {
+			query.getSingleResult();
+			System.out.println("Already exists");
+			return false;
+		} catch (Exception e) {
+			System.out.println("Error checking username uniqueness: " + e.getMessage());
+			System.out.println("Unique Username");
+			return true;  // Return false in case of an exception.
+		}
+	}
     @Transactional
 	public User saveUser(User user) {
 		this.sessionFactory.getCurrentSession().saveOrUpdate(user);

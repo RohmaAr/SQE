@@ -103,12 +103,23 @@ public class UserController{
 	@RequestMapping(value = "newuserregister", method = RequestMethod.POST)
 	public String newUseRegister(@ModelAttribute User user)
 	{
-		
+
 		System.out.println(user.getEmail());
 		user.setRole("ROLE_NORMAL");
-		this.userService.addUser(user);
-		
-		return "redirect:/";
+		if(!this.userService.isEmailUnique(user)) {
+			System.out.println("Notuniqueemail");
+			return "redirect:/register?q=notUniqueEmail";
+		}
+		else if(!this.userService.isUserUnique(user)){
+			System.out.println("Notuniqueusername");
+			return "redirect:/register?q=notUniqueUsername"; // or return to the registration page if you want
+
+		}
+		else{
+
+			this.userService.addUser(user);
+			return "redirect:/";
+		}
 	}
 	
 	
