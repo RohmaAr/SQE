@@ -177,8 +177,14 @@ public class AdminController {
 		product.setImage(productImage);
 		product.setWeight(weight);
 		product.setQuantity(quantity);
-		this.productService.addProduct(product);
-		return "redirect:/admin/products";
+		if(productImage.length()>255)
+		{
+			return "redirect:/admin/products/add?t=tooLong";
+		}
+		else {
+			this.productService.addProduct(product);
+			return "redirect:/admin/products";
+		}
 	}
 
 	@GetMapping("products/update/{id}")
