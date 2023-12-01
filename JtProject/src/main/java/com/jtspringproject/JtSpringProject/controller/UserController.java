@@ -61,6 +61,7 @@ public class UserController{
 		
 		System.out.println(pass);
 		User u = this.userService.checkLogin(username, pass);
+		String adminMail=this.userService.getAdminMail();
 		System.out.println(u.getUsername());
 		if(u.getUsername().equals(username)) {	
 			
@@ -68,7 +69,7 @@ public class UserController{
 			ModelAndView mView  = new ModelAndView("index");	
 			mView.addObject("user", u);
 			List<Product> products = this.productService.getProducts();
-
+			mView.addObject("adminMail", adminMail);
 			if (products.isEmpty()) {
 				mView.addObject("msg", "No products are available");
 			} else {

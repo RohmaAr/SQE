@@ -29,7 +29,19 @@ public class userDao {
 		List<User>  userList = session.createQuery("from CUSTOMER").list();
         return userList;
     }
-
+	@Transactional
+	public String getAdminMail(){
+		Query query = sessionFactory.getCurrentSession().createQuery("from CUSTOMER where role=:role");
+		query.setParameter("role", "ROLE_ADMIN");
+		try {
+			User user = (User) query.getSingleResult();
+			System.out.println(user.getEmail());
+				return user.getEmail();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return "";
+		}
+	}
 	@Transactional
 	public boolean isEmailUnique(User user) {
 		Query query = sessionFactory.getCurrentSession().createQuery("from CUSTOMER where email = :email");

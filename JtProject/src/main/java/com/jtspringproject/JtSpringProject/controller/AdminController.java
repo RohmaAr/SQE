@@ -189,11 +189,10 @@ public class AdminController {
 
 	@GetMapping("products/update/{id}")
 	public ModelAndView updateproduct(@PathVariable("id") int id) {
-		
+		System.out.println(	"GWTTING MAPPING FOR PRODUCTSUPDATE ID"+id);
 		ModelAndView mView = new ModelAndView("productsUpdate");
 		Product product = this.productService.getProduct(id);
 		List<Category> categories = this.categoryService.getCategories();
-
 		mView.addObject("categories",categories);
 		mView.addObject("product", product);
 		return mView;
@@ -202,7 +201,6 @@ public class AdminController {
 	@RequestMapping(value = "products/update/{id}",method=RequestMethod.POST)
 	public String updateProduct(@PathVariable("id") int id ,@RequestParam("name") String name,@RequestParam("categoryid") int categoryId ,@RequestParam("price") int price,@RequestParam("weight") int weight, @RequestParam("quantity")int quantity,@RequestParam("description") String description,@RequestParam("productImage") String productImage)
 	{
-
 //		this.productService.updateProduct();
 		return "redirect:/admin/products";
 	}

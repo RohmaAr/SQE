@@ -21,7 +21,7 @@ public class userService {
 	public User addUser(User user) {
 		return this.userDao.saveUser(user);
 	}
-
+	public String getAdminMail(){ return this.userDao.getAdminMail();}
 	public boolean isUserUnique(User user) { return this.userDao.isUsernameUnique(user);	}
 	public boolean isEmailUnique(User user) { return this.userDao.isEmailUnique(user);	}
 	public User checkLogin(String username, String password) {
