@@ -102,9 +102,23 @@ The following guides illustrate how to use some features concretely:
 
 ## Link
 - 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗽𝗿𝗼𝗷𝗲𝗰𝘁 𝘃𝗶𝗱𝗲𝗼 𝗪𝗼𝗿𝗸𝗶𝗻𝗴 𝗗𝗲𝗺𝗼 + 𝘀𝘁𝗲𝗽 𝗯𝘆 𝘀𝘁𝗲𝗽 𝗲𝘅𝗲𝗰𝘂𝘁𝗶𝗼𝗻 𝗹𝗶𝗻𝗸  ( old version )::---  [  click here  ](https://youtu.be/c6WWdINWSlI) [![youtube][youtube-shield]][youtube-url]
+ 
 
 [youtube-shield]:https://img.shields.io/youtube/views/c6WWdINWSlI?style=social
 [youtube-url]:  https://youtu.be/c6WWdINWSlI
 
 ## Issue and Solution 
-- A line of code in the AdminController file was generating an error while a PreparedStatement was being executed by execute() method. Simply changing that to executeQuery() resolved the issue.
+- A line of code in the AdminController file was generating an error while a PreparedStatement was being executed by execute()
+-method. Simply changing that to executeQuery() resolved the issue.
+Running with maven for test:l
+folowing changes have been made to pom.xml:
+![Screenshot 2023-12-03 233104](https://github.com/RohmaAr/SQE/assets/102369293/62ed2048-ba7a-464d-adbf-cd126c6486fa)
+Instructions:
+firstly update your Maven project to apply the changes.
+"mvn clean install"
+Run this command it will update your maven project.
+To run all tests, use the following Maven command:
+"mvn test"
+To run specific tests, use the -Dtest parameter with the test class or method name:
+mvn test -Dtest=TestClass
+Replace TestClass with the actual name of the class
