@@ -37,7 +37,7 @@
 				<ul class="navbar-nav">
 					<li class="nav-item active"><a class="nav-link" href="/adminhome">Home
 							Page</a></li>
-					<li class="nav-item active"><a class="nav-link" href="/logout">Logout</a>
+					<li class="nav-item active"><a class="nav-link" href="/admin/login">Logout</a>
 					</li>
 
 				</ul>
@@ -103,11 +103,11 @@
 					<td>${category.name }</td>
 
 					<td>
-						<form action="categories/delete" method="get">
+						<form action="/admin/categories/delete" method="post" onsubmit="return confirm('Are you sure you want to delete this category?')">
 							<input type="hidden" name="id" value="${category.id}">
-							<input type="submit" value="Delete" class="btn btn-danger">
+							<button type="submit" class="btn btn-danger">Delete</button>
 						</form>
-					</td>
+					    </td>
 
 					<td>
 						<form action="categories/update" method="get">

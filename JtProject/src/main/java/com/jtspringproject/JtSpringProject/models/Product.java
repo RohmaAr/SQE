@@ -32,6 +32,8 @@ public class Product {
 	private int weight;
 	
 	private String description;
+	private int categoryId;
+	private String productImage;
 
 	public int getId() {
 		return id;
@@ -101,6 +103,20 @@ public class Product {
 	@ManyToOne
     @JoinColumn(name = "customer_id")
     private User customer;
-	
+
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+	public int getCategoryId() {
+		return categoryId;
+	}
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
+	}
+
+	public String getProductImage() {
+		return productImage;
+	}
 	
 }

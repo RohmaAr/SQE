@@ -36,10 +36,23 @@ public class productDao {
 		return this.sessionFactory.getCurrentSession().get(Product.class, id);
 	}
 
-	public Product updateProduct(Product product){
-		this.sessionFactory.getCurrentSession().update(String.valueOf(Product.class),product);
+	@Transactional
+	public Product updateProduct(int id, String name, Category category, int price, int weight, int quantity, String description, String productImage){
+		Product product = this.sessionFactory.getCurrentSession().get(Product.class, id);
+		System.out.println("Product Dao: " + product.getId());
+		product.setName(name);
+		product.setCategory(category);
+		product.setPrice(price);
+		product.setWeight(weight);
+		product.setQuantity(product.getQuantity() + quantity);
+		product.setDescription(description);
+		product.setImage(productImage);
+
+		this.sessionFactory.getCurrentSession().update(product);
 		return product;
 	}
+
+
 	@Transactional
 	public Boolean deletProduct(int id) {
 

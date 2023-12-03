@@ -21,11 +21,16 @@ public class categoryDao {
 
 	@Transactional
 	public Category addCategory(String name) {
-		Category category = new Category();
-		category.setName(name);
-		this.sessionFactory.getCurrentSession().saveOrUpdate(category);
-		return category;
+		try {
+			Category category = new Category();
+			category.setName(name);
+			this.sessionFactory.getCurrentSession().save(category); // Use save instead of saveOrUpdate
+			return category;
+		} catch (Exception e) {
+			throw new RuntimeException("Failed to add category", e); // Wrap and rethrow the exception
+		}
 	}
+
 
 	@Transactional
 	public List<Category> getCategories() {
@@ -33,15 +38,14 @@ public class categoryDao {
 	}
 
 	@Transactional
-	public Boolean deletCategory(int id) {
+	public boolean deleteCategory(int id) {
+		Category categoryToDelete = sessionFactory.getCurrentSession().get(Category.class, id);
 
-		Session session = this.sessionFactory.getCurrentSession();
-		Object persistanceInstance = session.load(Category.class, id);
-
-		if (persistanceInstance != null) {
-			session.delete(persistanceInstance);
+		if (categoryToDelete != null) {
+			sessionFactory.getCurrentSession().delete(categoryToDelete);
 			return true;
 		}
+
 		return false;
 	}
 

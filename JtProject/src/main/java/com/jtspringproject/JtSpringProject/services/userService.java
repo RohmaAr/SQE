@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jtspringproject.JtSpringProject.dao.userDao;
 import com.jtspringproject.JtSpringProject.models.User;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class userService {
@@ -28,5 +29,14 @@ public class userService {
 		return this.userDao.getUser(username, password);
 	}
 
-	
+
+	@Transactional
+	public boolean deleteUser(int id) {
+		try {
+			return userDao.deleteUser(id);
+		} catch (Exception e) {
+			e.printStackTrace(); // Log the exception or handle it as appropriate
+			return false;
+		}
+	}
 }

@@ -36,7 +36,7 @@
 				<ul class="navbar-nav">
 					<li class="nav-item active"><a class="nav-link" href="/adminhome">Home
 							Page</a></li>
-					<li class="nav-item active"><a class="nav-link" href="/logout">Logout</a>
+					<li class="nav-item active"><a class="nav-link" href="/admin/login">Logout</a>
 					</li>
 
 				</ul>
@@ -46,11 +46,11 @@
 	</nav><br>
 	<div class="container-fluid">
 
-		
+
 		<table class="table">
 
 			<tr>
-				
+
 				<th scope="col">Customer Name</th>
 				<th scope="col">Email</th>
 				<th scope="col">Address</th>
@@ -64,20 +64,34 @@
 					</td>
 					<td>
 					    ${customer.email}
-						
+
 					</td>
 					<td>
 					    ${customer.address}
-						
+
 				    </td>
+					<td>
+						<!-- Add your delete button with a form for each customer -->
+						<form action="/deleteCustomer" method="post"  onsubmit="return confirm('Are you sure you want to delete this customer?')">
+							<input type="hidden" name="id" value="${customer.id}">
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
+					</td>
+					<td>
+						<!-- Add your update button with a form for each customer -->
+						<form action="/updateuser" method="post"  onsubmit="return confirm('Are you sure you want to update this customer?')">
+							<input type="hidden" name="id" value="${customer.id}">
+							<button type="submit" class="btn btn-danger">Update</button>
+						</form>
+					</td>
 					</tr>
                 </c:forEach>
 
 
-				
+
 			</tbody>
 		</table>
-		
+
 	</div>
 
 

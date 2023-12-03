@@ -9,22 +9,30 @@ import com.jtspringproject.JtSpringProject.dao.categoryDao;
 import com.jtspringproject.JtSpringProject.models.Category;
 
 import net.bytebuddy.dynamic.DynamicType.Builder.InnerTypeDefinition;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class categoryService {
 	@Autowired
 	private categoryDao categoryDao;
-	
+
 	public Category addCategory(String name) {
-		return this.categoryDao.addCategory(name);
+		try {
+			return this.categoryDao.addCategory(name);
+		} catch (Exception e) {
+			throw new RuntimeException("Failed to add category", e); // Wrap and rethrow the exception
+		}
 	}
+
+
 	
 	public List<Category> getCategories(){
 		return this.categoryDao.getCategories();
 	}
-	
+
+	@Transactional
 	public Boolean deleteCategory(int id) {
-		return this.categoryDao.deletCategory(id);
+		return this.categoryDao.deleteCategory(id);
 	}
 	
 	public Category updateCategory(int id,String name) {

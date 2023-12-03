@@ -18,41 +18,39 @@
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
 	crossorigin="anonymous">
 <title>Document</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    $(document).ready(function(){
-        var urlParams = new URLSearchParams(window.location.search);
-        var text = urlParams.get('t') || '';
-        console.log("url length check:", text);
-        if(text === 'tooLong') {
-                    $('#errorModal').modal('show');
-         }
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		$(document).ready(function(){
+			var urlParams = new URLSearchParams(window.location.search);
+			var text = urlParams.get('t') || '';
+			console.log("url length check:", text);
+			if(text === 'tooLong') {
+				$('#errorModal').modal('show');
+			}
 
-    });
-    /*]]>*/
-</script>
-
+		});
+		/*]]>*/
+	</script>
 </head>
 <body>
-
-<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="errorModalLabel">Image URL is too long</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="errorModalBody">
-                    Please enter a URL that is not longer than 255 characters
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
+productsadd.jsp mai :       <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="errorModalLabel">Image URL is too long</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="errorModalBody">
+				Please enter a URL that is not longer than 255 characters
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
 </div>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
@@ -73,7 +71,7 @@
 					<li class="nav-item active"><a class="nav-link"
 						href="/adminhome" >Home Page</a></li>
 					<li class="nav-item active"><a class="nav-link"
-						href="/logout" >Logout</a></li>
+						href="/admin/login" >Logout</a></li>
 
 				</ul>
 

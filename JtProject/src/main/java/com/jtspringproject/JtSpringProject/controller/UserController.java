@@ -29,6 +29,7 @@ import com.jtspringproject.JtSpringProject.services.cartService;
 
 
 
+
 @Controller
 public class UserController{
 	
@@ -37,6 +38,8 @@ public class UserController{
 
 	@Autowired
 	private productService productService;
+	@Autowired
+	private cartService cartService;
 
 	@GetMapping("/register")
 	public String registerUser()
@@ -58,15 +61,15 @@ public class UserController{
 	}
 	@RequestMapping(value = "userloginvalidate", method = RequestMethod.POST)
 	public ModelAndView userlogin( @RequestParam("username") String username, @RequestParam("password") String pass,Model model,HttpServletResponse res) {
-		
+
 		System.out.println(pass);
 		User u = this.userService.checkLogin(username, pass);
 		String adminMail=this.userService.getAdminMail();
 		System.out.println(u.getUsername());
-		if(u.getUsername().equals(username)) {	
-			
+		if(u.getUsername().equals(username)) {
+
 			res.addCookie(new Cookie("username", u.getUsername()));
-			ModelAndView mView  = new ModelAndView("index");	
+			ModelAndView mView  = new ModelAndView("index");
 			mView.addObject("user", u);
 			List<Product> products = this.productService.getProducts();
 			mView.addObject("adminMail", adminMail);
@@ -82,7 +85,7 @@ public class UserController{
 			mView.addObject("msg", "Please enter correct email and password");
 			return mView;
 		}
-		
+
 	}
 	
 	
@@ -161,13 +164,25 @@ public class UserController{
 			
 			
 		}
+	@PostMapping("/deleteCustomer")
+	public String deleteCustomer(@RequestParam("id") int id, Model model) {
+		boolean deletionResult = userService.deleteUser(id);
+		if (deletionResult) {
+			model.addAttribute("message", "Customer deleted successfully reload it to to reflect changes");
+		} else {
+			model.addAttribute("message", "Customer not found or deletion failed, reload it to reflect changes");
+		}
+		return "redirect:/displayCustomers";
+	}
 
 
-//	@GetMapping("carts")
-//	public ModelAndView  getCartDetail()
-//	{
-//		ModelAndView mv= new ModelAndView();
-//		List<Cart>carts = cartService.getCarts();
-//	}
+	@GetMapping("/carts")
+	public ModelAndView  getCartDetail()
+	{
+		ModelAndView mv = new ModelAndView("cartproduct");
+		List<Cart> carts = cartService.getCarts();
+		mv.addObject("carts", carts);
+		return mv;
+	}
 	  
 }

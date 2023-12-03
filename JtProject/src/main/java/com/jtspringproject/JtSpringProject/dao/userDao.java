@@ -11,15 +11,17 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.jtspringproject.JtSpringProject.models.User;
+
 
 
 @Repository
 public class userDao {
 	@Autowired
     private SessionFactory sessionFactory;
-	
+	private static final Logger logger = LoggerFactory.getLogger(userDao.class);
 	public void setSessionFactory(SessionFactory sf) {
         this.sessionFactory = sf;
     }
@@ -29,19 +31,7 @@ public class userDao {
 		List<User>  userList = session.createQuery("from CUSTOMER").list();
         return userList;
     }
-	@Transactional
-	public String getAdminMail(){
-		Query query = sessionFactory.getCurrentSession().createQuery("from CUSTOMER where role=:role");
-		query.setParameter("role", "ROLE_ADMIN");
-		try {
-			User user = (User) query.getSingleResult();
-			System.out.println(user.getEmail());
-				return user.getEmail();
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-			return "";
-		}
-	}
+
 	@Transactional
 	public boolean isEmailUnique(User user) {
 		Query query = sessionFactory.getCurrentSession().createQuery("from CUSTOMER where email = :email");
@@ -102,4 +92,39 @@ public class userDao {
 		}
     	
     }
+
+	@Transactional
+	public boolean deleteUser(int id) {
+		try {
+			Session currentSession = sessionFactory.getCurrentSession();
+			User userToDelete = currentSession.get(User.class, id);
+
+			if (userToDelete != null) {
+				currentSession.delete(userToDelete);
+				logger.info("User deleted successfully. ID: {}", id);
+				return true;
+			} else {
+				logger.warn("User with ID {} not found.", id);
+				return false;
+			}
+		} catch (Exception e) {
+			logger.error("An error occurred while deleting the user with ID: " + id, e);
+			return false;
+		}
+	}
+
+	@Transactional
+	public String getAdminMail(){
+		Query query = sessionFactory.getCurrentSession().createQuery("from CUSTOMER where role=:role");
+		query.setParameter("role", "ROLE_ADMIN");
+		try {
+			User user = (User) query.getSingleResult();
+			System.out.println(user.getEmail());
+			return user.getEmail();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return "";
+		}
+	}
 }
+
