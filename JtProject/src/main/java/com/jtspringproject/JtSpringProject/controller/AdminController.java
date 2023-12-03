@@ -177,17 +177,21 @@ public class AdminController {
 		product.setImage(productImage);
 		product.setWeight(weight);
 		product.setQuantity(quantity);
-		this.productService.addProduct(product);
-		return "redirect:/admin/products";
+		if(productImage.length()>255)
+		{
+			return "redirect:/admin/products/add?t=tooLong";
+		}
+		else {
+			this.productService.addProduct(product);
+			return "redirect:/admin/products";
+		}
 	}
 
 	@GetMapping("products/update/{id}")
 	public ModelAndView updateproduct(@PathVariable("id") int id) {
-		
 		ModelAndView mView = new ModelAndView("productsUpdate");
 		Product product = this.productService.getProduct(id);
 		List<Category> categories = this.categoryService.getCategories();
-
 		mView.addObject("categories",categories);
 		mView.addObject("product", product);
 		return mView;
@@ -196,7 +200,6 @@ public class AdminController {
 	@RequestMapping(value = "products/update/{id}",method=RequestMethod.POST)
 	public String updateProduct(@PathVariable("id") int id ,@RequestParam("name") String name,@RequestParam("categoryid") int categoryId ,@RequestParam("price") int price,@RequestParam("weight") int weight, @RequestParam("quantity")int quantity,@RequestParam("description") String description,@RequestParam("productImage") String productImage)
 	{
-
 //		this.productService.updateProduct();
 		return "redirect:/admin/products";
 	}

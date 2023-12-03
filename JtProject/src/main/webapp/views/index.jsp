@@ -47,7 +47,10 @@
                 <li class="nav-item active">
                     <a class="nav-link" sec:authorize="isAuthenticated()" href="logout">Logout</a>
                 </li>
-               
+               <li class="nav-item active">
+                  <a class="nav-link" href="mailto:${adminMail}">Contact us</a>
+               </li>
+
             </ul>
 
         </div>
