@@ -189,7 +189,6 @@ public class AdminController {
 
 	@GetMapping("products/update/{id}")
 	public ModelAndView updateproduct(@PathVariable("id") int id) {
-		System.out.println(	"GWTTING MAPPING FOR PRODUCTSUPDATE ID"+id);
 		ModelAndView mView = new ModelAndView("productsUpdate");
 		Product product = this.productService.getProduct(id);
 		List<Category> categories = this.categoryService.getCategories();

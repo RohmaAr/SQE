@@ -66,7 +66,24 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+				<configuration>
+					<includes>
+						<!-- Specify your test classes to include -->
+						<include>com.jtspringproject.JtSpringProject.controller.NewUserRegisterTest</include>
+						<include>com.jtspringproject.JtSpringProject.controller.userLoginTest</include>
+						<include>com.jtspringproject.JtSpringProject.controller.addProductPostTest</include>
+						<include>com.jtspringproject.JtSpringProject.dao.userDaoAddedMethodsTest</include>
+						<include>com.jtspringproject.JtSpringProject.services.userServiceAddedTest</include>
+					</includes>
+				</configuration>
+
+			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
