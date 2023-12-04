@@ -110,7 +110,7 @@ The following guides illustrate how to use some features concretely:
 ## Issue and Solution 
 - A line of code in the AdminController file was generating an error while a PreparedStatement was being executed by execute()
 -method. Simply changing that to executeQuery() resolved the issue.
-Running with maven for test:l
+Running with maven for test:
 folowing changes have been made to pom.xml:
 ![Screenshot 2023-12-03 233104](https://github.com/RohmaAr/SQE/assets/102369293/62ed2048-ba7a-464d-adbf-cd126c6486fa)
 Instructions:
@@ -122,3 +122,22 @@ To run all tests, use the following Maven command:
 To run specific tests, use the -Dtest parameter with the test class or method name:
 mvn test -Dtest=TestClass
 Replace TestClass with the actual name of the class
+Deliverable 5(Running tests)
+1. Open github.
+2. Select Actions
+3. Select configure Jave With Maven
+4. It will display a screen 
+5. Then select Commit changes
+6. Go to Intellij
+7. There will be a "M" symbol on the right
+8. Press that
+9. Then select the "Execute Maven Goal"
+10. It will execute the tests.
+11. Screen shots have been attached
+![Screenshot 2023-12-04 221546](https://github.com/RohmaAr/SQE/assets/102369293/326e3666-3d17-4257-88b8-f01ed3744afd)
+![Screenshot 2023-12-04 221610](https://github.com/RohmaAr/SQE/assets/102369293/93c5bd27-de3b-4d82-9900-397d97e73aab)
+![Screenshot 2023-12-04 221854](https://github.com/RohmaAr/SQE/assets/102369293/b8b07cf9-c485-4efd-b0c4-2b2682e163bb)
+![Screenshot 2023-12-04 221910](https://github.com/RohmaAr/SQE/assets/102369293/e40a061c-c44d-49b6-befa-e013f262f682)
+![Screenshot 2023-12-04 221920](https://github.com/RohmaAr/SQE/assets/102369293/ed690494-effc-41b5-b07d-3d5b56bc7cc3)
+![Screenshot 2023-12-04 222503](https://github.com/RohmaAr/SQE/assets/102369293/5226aa86-a726-4cf4-b403-44117ff94ccb)
+![Screenshot 2023-12-04 222516](https://github.com/RohmaAr/SQE/assets/102369293/8a65d928-e25d-454b-9726-294547cdfb06)
