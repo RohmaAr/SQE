@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > categoryDao</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.jtspringproject.JtSpringProject.dao</a>
+</div>
+
+<h1>Coverage Summary for Class: categoryDao (com.jtspringproject.JtSpringProject.dao)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">categoryDao</td>
+<td class="coverageStat">
+  <span class="percent">
+    14.3%
+  </span>
+  <span class="absValue">
+    (1/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.3%
+  </span>
+  <span class="absValue">
+    (1/19)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">categoryDao$$EnhancerBySpringCGLIB$$f6450697</td>
+  </tr>
+  <tr>
+    <td class="name">categoryDao$MockitoMock$1370358990</td>
+  </tr>
+  <tr>
+    <td class="name">categoryDao$MockitoMock$1370358990$auxiliary$9gEkfXHf</td>
+  </tr>
+  <tr>
+    <td class="name">categoryDao$MockitoMock$1370358990$auxiliary$bjnRt18Z</td>
+  </tr>
+  <tr>
+    <td class="name">categoryDao$MockitoMock$1370358990$auxiliary$CqFazIFQ</td>
+  </tr>
+  <tr>
+    <td class="name">categoryDao$MockitoMock$1370358990$auxiliary$EzyeC1fM</td>
+  </tr>
+  <tr>
+    <td class="name">categoryDao$MockitoMock$1370358990$auxiliary$hoQZHo9G</td>
+  </tr>
+  <tr>
+    <td class="name">categoryDao$MockitoMock$1370358990$auxiliary$Na9lOiIi</td>
+  </tr>
+  <tr>
+    <td class="name">categoryDao$MockitoMock$1370358990$auxiliary$qGL2Wa9W</td>
+  </tr>
+  <tr>
+    <td class="name">categoryDao$MockitoMock$1370358990$auxiliary$VsvEW3BW</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    14.3%
+  </span>
+  <span class="absValue">
+    (1/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.3%
+  </span>
+  <span class="absValue">
+    (1/19)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.jtspringproject.JtSpringProject.dao;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import org.hibernate.Session;
+&nbsp;import org.hibernate.SessionFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;import org.springframework.transaction.annotation.Transactional;
+&nbsp;
+&nbsp;import com.jtspringproject.JtSpringProject.models.Category;
+&nbsp;
+&nbsp;@Repository
+<b class="fc">&nbsp;public class categoryDao {</b>
+&nbsp;	@Autowired
+&nbsp;	private SessionFactory sessionFactory;
+&nbsp;
+&nbsp;	public void setSessionFactory(SessionFactory sf) {
+<b class="nc">&nbsp;		this.sessionFactory = sf;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public Category addCategory(String name) {
+&nbsp;		try {
+<b class="nc">&nbsp;			Category category = new Category();</b>
+<b class="nc">&nbsp;			category.setName(name);</b>
+<b class="nc">&nbsp;			this.sessionFactory.getCurrentSession().save(category); // Use save instead of saveOrUpdate</b>
+<b class="nc">&nbsp;			return category;</b>
+<b class="nc">&nbsp;		} catch (Exception e) {</b>
+<b class="nc">&nbsp;			throw new RuntimeException(&quot;Failed to add category&quot;, e); // Wrap and rethrow the exception</b>
+&nbsp;		}
+&nbsp;	}
+&nbsp;
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public List&lt;Category&gt; getCategories() {
+<b class="nc">&nbsp;		return this.sessionFactory.getCurrentSession().createQuery(&quot;from CATEGORY&quot;).list();</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public boolean deleteCategory(int id) {
+<b class="nc">&nbsp;		Category categoryToDelete = sessionFactory.getCurrentSession().get(Category.class, id);</b>
+&nbsp;
+<b class="nc">&nbsp;		if (categoryToDelete != null) {</b>
+<b class="nc">&nbsp;			sessionFactory.getCurrentSession().delete(categoryToDelete);</b>
+<b class="nc">&nbsp;			return true;</b>
+&nbsp;		}
+&nbsp;
+<b class="nc">&nbsp;		return false;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public Category updateCategory(int id, String name) {
+<b class="nc">&nbsp;		Category category = this.sessionFactory.getCurrentSession().get(Category.class, id);</b>
+<b class="nc">&nbsp;		category.setName(name);</b>
+&nbsp;
+<b class="nc">&nbsp;		this.sessionFactory.getCurrentSession().update(category);</b>
+<b class="nc">&nbsp;		return category;</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@Transactional
+&nbsp;	public Category getCategory(int id) {
+<b class="nc">&nbsp;		return this.sessionFactory.getCurrentSession().get(Category.class,id);</b>
+&nbsp;	}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-06 10:35</div>
+</div>
+</body>
+</html>
